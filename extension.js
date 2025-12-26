@@ -83,14 +83,12 @@ async function getResultSet(terms, cancellable) {
     }
     
     results.sort((a, b) => usage.compare(a, b));
-    log(`GrkEngSearchExtension search: ${terms.join(' ')}`);
     
     return results;
 }
 
 export default class GrkEngSearchExtension {
     enable() {
-        log('GrkEngSearchExtension ENABLED');
         generateIvertedDict(TrancodeGrkToEngDict, TrancodeEngToGrkDict);
         
         originalGetInitialResultSet =
@@ -100,7 +98,6 @@ export default class GrkEngSearchExtension {
     }
     
     disable() {
-        log('GrkEngSearchExtension DISABLED');
         if (originalGetInitialResultSet) {
             AppDisplay.AppSearchProvider.prototype.getInitialResultSet =
                 originalGetInitialResultSet;
